@@ -58,6 +58,33 @@ public class Yard extends Frame {
 		gameOver = true;
 	}
 	
+	public void paint(Graphics g) {
+		Color c = g.getColor();
+		g.setColor(Color.GRAY);
+		g.fillRect(0, 0, COLS * BLOCK_SIZE, ROWS * BLOCK_SIZE);
+		g.setColor(Color.DARK_GRAY);
+		
+		for(int i=1; i<ROWS; i++) {
+			g.drawLine(0, BLOCK_SIZE * i, COLS * BLOCK_SIZE, BLOCK_SIZE * i);
+		}
+		for(int i=1; i<COLS; i++) {
+			g.drawLine(BLOCK_SIZE * i, 0, BLOCK_SIZE * i, BLOCK_SIZE * ROWS);
+		}
+		
+		g.setColor(Color.YELLOW);
+		g.drawString("score:" + score, 10, 60);
+		if(gameOver) {
+			g.setFont(fontGameOver);
+			g.drawString("GAMEOVER", 120, 180);
+			
+			paintThread.pause();
+		}
+		g.setColor(c);
+		s.eat(e);
+		e.draw(g);
+		s.draw(g);
+	}
+	
 	
 	
 	
@@ -66,37 +93,7 @@ public class Yard extends Frame {
 			offScreenImage = this.createImage(COLS * BLOCK_SIZE, ROWS * BLOCK_SIZE );
 		}
 		Graphics gOff = offScreenImage.getGraphics();
-		Color c = gOff.getColor();
-		gOff.setColor(Color.GRAY);
-		gOff.fillRect(0, 0, COLS * BLOCK_SIZE, ROWS * BLOCK_SIZE);
-		gOff.setColor(Color.DARK_GRAY);
-		
-		for(int i=1; i<ROWS; i++) {
-			gOff.drawLine(0, BLOCK_SIZE * i, COLS * BLOCK_SIZE, BLOCK_SIZE * i);
-		}
-		for(int i=1; i<COLS; i++) {
-			gOff.drawLine(BLOCK_SIZE * i, 0, BLOCK_SIZE * i, BLOCK_SIZE * ROWS);
-		}
-		
-		gOff.setColor(Color.YELLOW);
-		gOff.drawString("score:" + score, 10, 60);
-		if(gameOver) {
-			gOff.setFont(fontGameOver);
-			gOff.drawString("GAME OVER", 120, 180);
-			
-			paintThread.pause();
-		}
-		gOff.setColor(c);
-		s.eat(e);
-		
-		
-		c = gOff.getColor();
-		gOff.setColor(color);
-		gOff.fillOval(Yard.BLOCK_SIZE * e.col, Yard.BLOCK_SIZE * e.row, e.w, e.h);  
-		gOff.setColor(c);
-		if(color == Color.GREEN) color = Color.RED;
-		else color = Color.GREEN;
-		s.draw(gOff);
+		paint(gOff);
 		g.drawImage(offScreenImage, 0, 0, null);
 	}
 	
