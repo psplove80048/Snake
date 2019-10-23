@@ -19,11 +19,11 @@ public class Yard extends Frame {
 	public static final int COLS = 30;
 	public static final int BLOCK_SIZE = 15;
 	
-	private Color color = Color.GREEN;
 	
 	private Font fontGameOver = new Font(Font.DIALOG, Font.BOLD, 50);
 	private int score = 0;
 	
+	//INIT
 	Snake s = new Snake(this);
 	Egg e = new Egg();
 	Image offScreenImage = null;
@@ -39,7 +39,7 @@ public class Yard extends Frame {
 		this.setLocation(200, 200);
 		this.setSize(COLS * BLOCK_SIZE, ROWS * BLOCK_SIZE);
 		
-		
+		//退出鍵
 		this.addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
 				System.exit(0);
@@ -58,12 +58,13 @@ public class Yard extends Frame {
 		gameOver = true;
 	}
 	
+	//GUI
 	public void paint(Graphics g) {
 		Color c = g.getColor();
 		g.setColor(Color.GRAY);
 		g.fillRect(0, 0, COLS * BLOCK_SIZE, ROWS * BLOCK_SIZE);
 		g.setColor(Color.DARK_GRAY);
-		
+		//畫線
 		for(int i=1; i<ROWS; i++) {
 			g.drawLine(0, BLOCK_SIZE * i, COLS * BLOCK_SIZE, BLOCK_SIZE * i);
 		}
@@ -106,7 +107,7 @@ public class Yard extends Frame {
 				if(pause) continue;
 				else repaint();
 				try {
-					Thread.sleep(200);		
+					Thread.sleep(200);		 
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
@@ -120,6 +121,7 @@ public class Yard extends Frame {
 		
 	}
 	
+	//監聽按鍵
 	private class KeyMonitor extends KeyAdapter {
 		
 		public void keyPressed(KeyEvent e) {
