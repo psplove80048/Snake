@@ -20,11 +20,7 @@ public class Snake {
 		this.y = y;
 	}
 	
-	
-
-	
-	public void draw(Graphics g) {
-		if(size <= 0) return;
+	public void addToHead() {
 		Node node = null;
 		switch(head.dir) {
 		case L :
@@ -43,11 +39,9 @@ public class Snake {
 		node.next = head;
 		head.prev = node;
 		head = node;
-		
-		if(size == 0) return;
-		tail = tail.prev;
-		tail.next = null;
-		
+	}
+	
+	private void checkDead() {
 		if(head.row < 2 || head.col < 0 || head.row > Yard.ROWS || head.col > Yard.COLS) {
 			y.stop();
 		}
@@ -57,6 +51,21 @@ public class Snake {
 				y.stop();
 			}
 		}
+		
+	}
+	
+	private void deleteFromTail() {
+		if(size == 0) return;
+		tail = tail.prev;
+		tail.next = null;
+	}
+
+	
+	public void draw(Graphics g) {
+		if(size <= 0) return;
+		addToHead();
+		deleteFromTail();
+		checkDead();
 		for(Node n = head; n != null; n = n.next) {
 			n.draw(g);
 		}	
