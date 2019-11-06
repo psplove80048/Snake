@@ -63,12 +63,15 @@ public class Snake {
 	
 	public void draw(Graphics g) {
 		if(size <= 0) return;
-		addToHead();
-		deleteFromTail();
-		checkDead();
+		move();
 		for(Node n = head; n != null; n = n.next) {
 			n.draw(g);
 		}	
+	}
+	private void move() {
+		addToHead();
+		deleteFromTail();
+		checkDead();
 	}
 	
  	
