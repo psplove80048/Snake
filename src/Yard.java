@@ -39,7 +39,7 @@ public class Yard extends Frame {
 		this.setLocation(200, 200);
 		this.setSize(COLS * BLOCK_SIZE, ROWS * BLOCK_SIZE);
 		
-		//退出鍵
+		//exit
 		this.addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
 				System.exit(0);
@@ -64,7 +64,7 @@ public class Yard extends Frame {
 		g.setColor(Color.GRAY);
 		g.fillRect(0, 0, COLS * BLOCK_SIZE, ROWS * BLOCK_SIZE);
 		g.setColor(Color.DARK_GRAY);
-		//畫線
+		//draw line
 		for(int i=1; i<ROWS; i++) {
 			g.drawLine(0, BLOCK_SIZE * i, COLS * BLOCK_SIZE, BLOCK_SIZE * i);
 		}
@@ -121,7 +121,7 @@ public class Yard extends Frame {
 		
 	}
 	
-	//監聽按鍵
+	//keymoniter
 	private class KeyMonitor extends KeyAdapter {
 		
 		public void keyPressed(KeyEvent e) {

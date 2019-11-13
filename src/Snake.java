@@ -54,6 +54,7 @@ public class Snake {
 		
 	}
 	
+
 	private void deleteFromTail() {
 		if(size == 0) return;
 		tail = tail.prev;
@@ -75,7 +76,6 @@ public class Snake {
 	}
 	
  	
-
 
 	private class Node {
 		int w = Yard.BLOCK_SIZE;
@@ -103,24 +103,7 @@ public class Snake {
 	public void eat(Egg e) {
 		if(this.getRect().intersects(e.getRect())) {
 			e.reAppear();
-			Node node = null;
-			switch(head.dir) {
-			case L :
-				node = new Node(head.row, head.col - 1, head.dir);
-				break;
-			case U :
-				node = new Node(head.row - 1, head.col, head.dir);
-				break;
-			case R :
-				node = new Node(head.row, head.col + 1, head.dir);
-				break;
-			case D :
-				node = new Node(head.row + 1, head.col, head.dir);
-				break;
-			}
-			node.next = head;
-			head.prev = node;
-			head = node;
+			this.addToHead();
 			y.setScore(y.getScore() + 5);
 		}
 	}
@@ -129,32 +112,26 @@ public class Snake {
 		return new Rectangle(Yard.BLOCK_SIZE * head.col, Yard.BLOCK_SIZE * head.row, head.w, head.h);
 	}
 	
-	
+	//monitor
 	public void keyPressed(KeyEvent e) {
 		int key = e.getKeyCode();
-		if (key ==  KeyEvent.VK_LEFT)
-		{
+		switch(key) {
+		case KeyEvent.VK_LEFT :
 			if(head.dir != Dir.R)
 				head.dir = Dir.L;
-			
-		}
-		if (key ==  KeyEvent.VK_UP)
-		{
+			break;
+		case KeyEvent.VK_UP :
 			if(head.dir != Dir.D)
 				head.dir = Dir.U;
-			
-		}
-		if (key ==  KeyEvent.VK_RIGHT)
-		{
+			break;
+		case KeyEvent.VK_RIGHT :
 			if(head.dir != Dir.L)	
-			   head.dir = Dir.R;
-			
-		}
-		
-		if (key ==  KeyEvent.VK_DOWN)
-		{
+				head.dir = Dir.R;
+			break;
+		case KeyEvent.VK_DOWN :
 			if(head.dir != Dir.U)
 				head.dir = Dir.D;
+			break;
 		}
 		}	
 	}
