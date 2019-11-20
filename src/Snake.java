@@ -54,7 +54,7 @@ public class Snake {
 		
 	}
 	
-
+    //delmove
 	private void deleteFromTail() {
 		if(size == 0) return;
 		tail = tail.prev;
@@ -69,6 +69,7 @@ public class Snake {
 			n.draw(g);
 		}	
 	}
+	//nodemove
 	private void move() {
 		addToHead();
 		deleteFromTail();
@@ -76,7 +77,7 @@ public class Snake {
 	}
 	
  	
-
+    //definenode
 	private class Node {
 		int w = Yard.BLOCK_SIZE;
 		int h = Yard.BLOCK_SIZE;
@@ -99,7 +100,7 @@ public class Snake {
 		}
 	}
 	
-	
+	//addpoint
 	public void eat(Egg e) {
 		if(this.getRect().intersects(e.getRect())) {
 			e.reAppear();
@@ -112,7 +113,7 @@ public class Snake {
 		return new Rectangle(Yard.BLOCK_SIZE * head.col, Yard.BLOCK_SIZE * head.row, head.w, head.h);
 	}
 	
-	//monitor
+	//keymonitor
 	public void keyPressed(KeyEvent e) {
 		int key = e.getKeyCode();
 		switch(key) {
